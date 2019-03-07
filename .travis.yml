@@ -24,3 +24,15 @@ before_script:
 script:
   - julia build_tarballs.jl
 
+deploy:
+  provider: releases
+  api_key:
+      # Note; this api_key is only valid for Affie/ZCMBuilder; you need
+      # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+    secure: "lbPssplGfizqAUgMFoVXHBS24zGgadmfZ67X5N/EF+lnRPpo8TRPNJUuGAzsowwhPYyF1jFavp3Lmbu2LtpQ5gJGeIHzbt4UftMgQkoLMWEdw/5V2gc5opv1PvXypqwWLXIZ2Wwl3fpv4gWxHm/7vczHph7dpmiBQxvnfbc6fsFzONo1AdLl/tvwFUl9IvxmkihIh7/zIMJI2LYLNRIFZuz3Cc3aMFidEGix0hMWLBpuZqRir6dae3RrwDwtSgwlWmQXPPSnH9YDzbkTP4T72d+b/OQhOhjP+aehB3qHjnZeSvBBfWrcJ+Y9rY/Wj6Z4d/dPXAuwXgqTrID8KVPUJwDg/dw0putxH7dkcEyivW5VfKcXKVB+rB7ngWkQzd60chsxxNav6C7nKrXAhLDa5gGq5/RITxR+IY3M8vzKCgQs05EhUhdR1EWJ/WOXlreBBvNFPRleD47IlAEL094qCPU+8iJtXPf+P0ei4BRhivSbHepWKLOXjI/xs4shA6dfJLOkjiO6OEr5h8t2X+enNRR9xsrbc5x452cxskwT3GmkAyaFrsa+Xgr8Y/GHTxg4B8TeQeT1fvm6gGsK+k0jzJdYREYfeVxj7KGL5bu84Mj/Gnn7SGqf6KLcY25YajTjch60M3cDtUxU+dTOre/4WqXsT+1zkweWAu8CZ+Ce0nQ="
+  file_glob: true
+  file: products/*
+  skip_cleanup: true
+  on:
+    repo: Affie/ZCMBuilder
+    tags: true
