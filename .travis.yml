@@ -1,8 +1,8 @@
 language: julia
 os:
-  - linux
+- linux
 julia:
-  - 1.0
+- 1.0
 notifications:
   email: false
 git:
@@ -10,29 +10,24 @@ git:
 cache:
   timeout: 1000
   directories:
-    - downloads
+  - downloads
 env:
   global:
-    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
-    - BINARYBUILDER_AUTOMATIC_APPLE=false
+  - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+  - BINARYBUILDER_AUTOMATIC_APPLE=false
 sudo: required
-
-# Before anything else, get the latest versions of things
 before_script:
-  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
-
+- julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
 script:
-  - julia build_tarballs.jl
-
+- julia build_tarballs.jl
 deploy:
   provider: releases
   api_key:
       # Note; this api_key is only valid for Affie/ZCMBuilder; you need
       # to make your own: https://docs.travis-ci.com/user/deployment/releases/
-    secure: "lbPssplGfizqAUgMFoVXHBS24zGgadmfZ67X5N/EF+lnRPpo8TRPNJUuGAzsowwhPYyF1jFavp3Lmbu2LtpQ5gJGeIHzbt4UftMgQkoLMWEdw/5V2gc5opv1PvXypqwWLXIZ2Wwl3fpv4gWxHm/7vczHph7dpmiBQxvnfbc6fsFzONo1AdLl/tvwFUl9IvxmkihIh7/zIMJI2LYLNRIFZuz3Cc3aMFidEGix0hMWLBpuZqRir6dae3RrwDwtSgwlWmQXPPSnH9YDzbkTP4T72d+b/OQhOhjP+aehB3qHjnZeSvBBfWrcJ+Y9rY/Wj6Z4d/dPXAuwXgqTrID8KVPUJwDg/dw0putxH7dkcEyivW5VfKcXKVB+rB7ngWkQzd60chsxxNav6C7nKrXAhLDa5gGq5/RITxR+IY3M8vzKCgQs05EhUhdR1EWJ/WOXlreBBvNFPRleD47IlAEL094qCPU+8iJtXPf+P0ei4BRhivSbHepWKLOXjI/xs4shA6dfJLOkjiO6OEr5h8t2X+enNRR9xsrbc5x452cxskwT3GmkAyaFrsa+Xgr8Y/GHTxg4B8TeQeT1fvm6gGsK+k0jzJdYREYfeVxj7KGL5bu84Mj/Gnn7SGqf6KLcY25YajTjch60M3cDtUxU+dTOre/4WqXsT+1zkweWAu8CZ+Ce0nQ="
+    secure: Z5iNVOrruaAIFUAw9CaoPuiyoDqN8OrZO085d+XP35NGRNGM1ANuh5WZO+4aIfmViF50YtZVXUrXJiuqzrB13c04xMyG9DEJvmpcpIn9xEyAX7qi9G0v6HgdQuWiuOs8BccEOw+L/7aUt8JC9izYT2ZCPSRludmxUskBCknr2f3VQZLKWCjhFJOr3wXyQ6HRrosULsNYeZBcM0RhkzD6KzWUUPnBDZBbwPTf2r6N6hSsC9zUdNSobrXy5YY9akm2ZJBLhU7wiGeWAH4x1gW6hpIzyiwnfW3HpUP/eQarzPK6pvuq97vIZ0fbsVDD9bQyGhpREs9DUraq62WaSZGPDo4/bJecX4Uo15yLWZgJrJqrgQAHfwMrZ3W1dVSAAZJ2FZUu2uDt2RKPxFDYns5BjO9n1N+lN8SpPScgZRtatRoFBiyex9fokIoEuCGLKeqTMnPx7uH80ynci4BMtOcg/sdKvEDsGbAOiwVLH+xsJY5sWkGtpDLQY7hvMBnPmbqfV8qCNGeBIriywfk0lzA3wVQtUHzLwrpd/Xn9kx/YNSH/FelLH7frIVgtQA2MUblkPlwKJsFmKopTgUhnRl6mzk0iNDVRNTSRCojYCypXUooSy887p7E5ZA8Vsyo/D7JNsRFo5wJ26yRHfOarVni5P+C35Z7c/XNPRiFt6CpfDsw=
   file_glob: true
   file: products/*
   skip_cleanup: true
   on:
     repo: Affie/ZCMBuilder
-    tags: true
